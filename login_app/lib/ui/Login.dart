@@ -11,6 +11,22 @@ class LoginState extends State<Login> {
 
   final TextEditingController _userController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
+  String _welcomeString = "";
+
+  void _erase() {
+    setState(() {
+      _userController.clear();
+      _passwordController.clear();
+    });
+  }
+
+  void _showWelcome() {
+    setState(() {
+      if(_userController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
+        _welcomeString = _userController.text;
+      } else _welcomeString = "Nothing!";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +38,7 @@ class LoginState extends State<Login> {
       backgroundColor: Colors.blueGrey,
       body: new Container(
         alignment: Alignment.topCenter,
-        child: new Column(
+        child: new ListView(
           children: <Widget>[
             //image/profile
             new Image.asset(
@@ -50,6 +66,7 @@ class LoginState extends State<Login> {
                         hintText: 'Password',
                         icon: new Icon(Icons.lock)
                     ),
+                    obscureText: true,
                   ),
                   new Padding(padding: new EdgeInsets.all(10.5)),
                   new Center(
@@ -58,7 +75,7 @@ class LoginState extends State<Login> {
                         new Container(
                           margin: const EdgeInsets.only(left: 38.0),
                           child: new RaisedButton(
-                              onPressed: () => debugPrint("Login"),
+                              onPressed: _showWelcome,
                               color: Colors.redAccent,
                               child: new Text(
                                   "Login",
@@ -72,7 +89,7 @@ class LoginState extends State<Login> {
                         new Container(
                           margin: const EdgeInsets.only(left: 120.0),
                           child: new RaisedButton(
-                            onPressed: () => debugPrint("Clear"),
+                            onPressed: _erase,
                             color: Colors.redAccent,
                             child: new Text(
                               "Clear",
@@ -93,7 +110,7 @@ class LoginState extends State<Login> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text("Welcome, Bonni", style: new TextStyle(
+                new Text("Welcome, $_welcomeString", style: new TextStyle(
                   color: Colors.white,
                   fontSize: 19.4,
                   fontWeight: FontWeight.w500,
