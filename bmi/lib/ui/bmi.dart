@@ -19,11 +19,13 @@ class BMIState extends State<BMI> {
   double calculateBMI() {
     setState(() {
       _bmiScore = (double.parse(_weight.text)/(double.parse(_height.text)*double.parse(_height.text)))*4.882;
-      if(_bmiScore <= 15) {
-        _situation = "Very severely underweight";
-      } else if (_bmiScore >15 && _bmiScore <= 16) {
-        _situation = "Severely underweight";
-      } else _situation = "This is a joke";
+      if(_bmiScore <= 18.5) {
+        _situation = "Underweight";
+      } else if (_bmiScore >18.5 && _bmiScore <= 24.9) {
+        _situation = "Normal";
+      } else if (_bmiScore > 24.9 && _bmiScore <= 29.9) {
+        _situation = "Overweight";
+      } else _situation = "Obese";
       return _bmiScore;
     });
   }
