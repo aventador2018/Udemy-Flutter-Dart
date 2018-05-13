@@ -38,7 +38,8 @@ void main() async {
                   "${_features[index]['properties']['place']}",
                   style: new TextStyle(
                       color: Colors.grey,
-                      fontSize: 12.0
+                      fontSize: 12.0,
+                    fontStyle: FontStyle.italic
                   ),
                 ),
                 leading: new CircleAvatar(
